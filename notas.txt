@@ -1,0 +1,67 @@
+editar arquivo de migrations
+    navegue pelas pastas até o arquivo de mirations 0001 ou mais
+
+criar as migrations
+    python manage.py migrations
+ver os codigo gerados pela migrations
+    python manage.py sqlmigrate <nomeapp> 0001
+
+
+SHELL do DJANDO
+In [1]: from blog.models import Post
+
+In [2]: post = Post.objects.all()
+
+In [3]: post
+Out[3]: <QuerySet [<Post: primeiro post>, <Post: segundo post>, <Post: terceiro post>]>
+
+In [4]: post[0]
+Out[4]: <Post: primeiro post>
+
+In [5]: post[0].created
+Out[5]: datetime.datetime(2022, 4, 6, 18, 24, 25, 494616, tzinfo=<UTC>)
+
+In [10]: post = Post.objects.get(id=1)
+
+In [11]: post
+Out[11]: <Post: primeiro post>
+
+In [12]: post.author
+Out[12]: <User: daniel>
+
+atualizar registro por SHELL
+In [13]: post.title
+Out[13]: 'primeiro post'
+
+In [14]: post.title = "meu primeiro artigo"
+
+In [15]: post.title
+Out[15]: 'meu primeiro artigo'
+In [16]: post.save()
+
+#fitro de registro
+In [21]: Post.objects.filter(author__username="daniel")
+Out[21]: <QuerySet [<Post: meu primeiro artigo>, <Post: segundo post>, <Post: terceiro post>]>
+
+In [22]: Post.objects.filter(author__username="user1")
+Out[22]: <QuerySet []>
+
+#filtro pelo usuario/autor do post
+In [23]: from django.contrib.auth.models import User
+
+In [24]: user =  User.objects.get(username="daniel")
+
+In [25]: user
+Out[25]: <User: daniel>
+
+In [26]: user.post_set.all()
+Out[26]: <QuerySet [<Post: meu primeiro artigo>, <Post: segundo post>, <Post: terceiro post>]>
+
+
+
+
+#####################################################
+https://www.youtube.com/watch?v=Dzuiy-JNi-E&t=1518s
+
+Conectando URL A view
+
